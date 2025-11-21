@@ -11,7 +11,7 @@ import {
 
 dotenv.config();
 
-// Listar todos los usuarios
+//Listar todos los usuarios
 export const listarUsuarios = (req, res) => {
   getAllUsuarios((err, results) => {
     if (err) return res.status(500).json({ error: err });
@@ -19,7 +19,7 @@ export const listarUsuarios = (req, res) => {
   });
 };
 
-// Registrar usuario
+//Registrar usuario
 export const registrarUsuario = async (req, res) => {
   const { nombre, email, contraseña } = req.body;
   if (!nombre || !email || !contraseña) {
@@ -40,7 +40,7 @@ export const registrarUsuario = async (req, res) => {
   });
 };
 
-// Login
+//Login
 export const loginUsuario = (req, res) => {
   const { email, contraseña } = req.body;
   getUsuarioByEmail(email, async (err, results) => {
@@ -73,7 +73,7 @@ export const loginUsuario = (req, res) => {
   });
 };
 
-// Actualizar usuario
+//Actualizar usuario
 export const actualizarUsuario = (req, res) => {
   const { id } = req.params;
   const { nombre, email, rol } = req.body;
@@ -83,7 +83,7 @@ export const actualizarUsuario = (req, res) => {
   });
 };
 
-// Eliminar usuario
+//Eliminar usuario
 export const eliminarUsuario = (req, res) => {
   const { id } = req.params;
   deleteUsuario(id, (err) => {

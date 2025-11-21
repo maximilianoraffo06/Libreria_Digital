@@ -7,7 +7,7 @@ import {
 } from "../models/prestamosModel.js";
 import connection from "../config/db.js";
 
-// Listar préstamos
+//Listar préstamos
 export const listarPrestamos = (req, res) => {
   obtenerPrestamos((err, results) => {
     if (err) return res.status(500).json({ mensaje: "Error al obtener los préstamos" });
@@ -15,9 +15,9 @@ export const listarPrestamos = (req, res) => {
   });
 };
 
-// 🔹 Listar préstamos del usuario autenticado
+//Listar préstamos del usuario autenticado
 export const listarPrestamosDeUsuario = (req, res) => {
-  const usuarioId = req.usuario.id; // viene del token JWT (authMiddleware)
+  const usuarioId = req.usuario.id;
   obtenerPrestamosPorUsuario(usuarioId, (err, results) => {
     if (err) return res.status(500).json({ mensaje: "Error al obtener préstamos del usuario" });
     res.json(results);
@@ -25,7 +25,7 @@ export const listarPrestamosDeUsuario = (req, res) => {
 };
 
 
-// Registrar préstamo (con verificación de disponibilidad)
+// Registrar préstamo
 export const registrarPrestamo = (req, res) => {
   const { usuario_id, libro_codigo, fecha_prestamo, fecha_devolucion_prevista } = req.body;
 
@@ -33,7 +33,7 @@ export const registrarPrestamo = (req, res) => {
     return res.status(400).json({ mensaje: "Faltan datos obligatorios" });
   }
 
-  // 🔍 Verificar si el libro está disponible
+  //Verificar si el libro está disponible
   connection.query(
     "SELECT estado FROM libros WHERE codigo = ?",
     [libro_codigo],
@@ -46,16 +46,16 @@ export const registrarPrestamo = (req, res) => {
 
       const { estado } = results[0];
 
-      // 🚫 Si el libro ya está prestado, no permitir nuevo préstamo
+      //Si el libro ya está prestado, no permitir nuevo préstamo
       if (estado === "prestado") {
         return res.status(400).json({ mensaje: "El libro ya está prestado" });
       }
 
-      // ✅ Si el libro está disponible, registrar el préstamo
+      //Si el libro está disponible, registrar el préstamo
       agregarPrestamo({ usuario_id, libro_codigo, fecha_prestamo, fecha_devolucion_prevista }, (err) => {
         if (err) return res.status(500).json({ mensaje: "Error al registrar el préstamo" });
 
-        // 🔄 Actualizar el estado del libro a "prestado"
+        //Actualizar el estado del libro a "prestado"
         connection.query(
           "UPDATE libros SET estado = 'prestado' WHERE codigo = ?",
           [libro_codigo],

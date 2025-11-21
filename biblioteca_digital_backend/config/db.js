@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
-// Asegura que dotenv cargue correctamente el archivo .env desde la raíz
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: __dirname + "/../.env" });
 

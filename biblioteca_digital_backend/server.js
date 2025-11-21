@@ -12,7 +12,7 @@ app.use("/public", express.static("public"));
 app.use(cors());
 app.use(express.json());
 
-// Rutas
+//Rutas
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/libros", librosRoutes);
 app.use("/api/prestamos", prestamosRoutes);

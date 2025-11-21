@@ -119,7 +119,7 @@ h2 {
 
 /* ==== PANTALLA DE INICIO ==== */
 .home-container {
-  min-height: calc(100vh - 70px); /* resta la altura del navbar */
+  min-height: calc(100vh - 70px);
   background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
   padding: 60px 20px;
 }

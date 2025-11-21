@@ -1,6 +1,6 @@
 import connection from "../config/db.js";
 
-// 🔹 Listar todos los préstamos (con nombres y títulos)
+//Listar todos los préstamos (con nombres y títulos)
 export const obtenerPrestamos = (callback) => {
   const query = `
     SELECT 
@@ -18,7 +18,7 @@ export const obtenerPrestamos = (callback) => {
   connection.query(query, callback);
 };
 
-// 🔹 Agregar un préstamo
+//Agregar un préstamo
 export const agregarPrestamo = (prestamo, callback) => {
   const { usuario_id, libro_codigo, fecha_prestamo, fecha_devolucion_prevista } = prestamo;
   const query = `
@@ -28,7 +28,7 @@ export const agregarPrestamo = (prestamo, callback) => {
   connection.query(query, [usuario_id, libro_codigo, fecha_prestamo, fecha_devolucion_prevista], callback);
 };
 
-// 🔹 Marcar préstamo como devuelto
+//Marcar préstamo como devuelto
 export const devolverPrestamo = (id, callback) => {
   const query = `
     UPDATE prestamos SET estado = 'devuelto' WHERE id = ?
@@ -36,13 +36,13 @@ export const devolverPrestamo = (id, callback) => {
   connection.query(query, [id], callback);
 };
 
-// 🔹 Eliminar préstamo
+//Eliminar préstamo
 export const eliminarPrestamo = (id, callback) => {
   const query = "DELETE FROM prestamos WHERE id = ?";
   connection.query(query, [id], callback);
 };
 
-// 🔹 Obtener préstamos de un usuario específico
+//Obtener préstamos de un usuario específico
 export const obtenerPrestamosPorUsuario = (usuarioId, callback) => {
   const query = `
     SELECT 
