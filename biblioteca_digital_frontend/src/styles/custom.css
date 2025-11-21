@@ -1,0 +1,78 @@
+/* === Estilo global de toda la app === */
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Tarjetas / formularios */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+/* Tablas */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #212529;
+  color: white;
+}
+
+.table td,
+.table th {
+  vertical-align: middle !important;
+}
+
+/* Botones */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Formularios */
+.form-control {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Espaciado en todas las páginas */
+.page-container {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #212529;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: auto;
+}

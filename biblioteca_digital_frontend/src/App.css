@@ -1,0 +1,23 @@
+/* ==== Contenedor general ==== */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==== Sección principal ==== */
+main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ==== Tarjetas de libros ==== */
+.card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}

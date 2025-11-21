@@ -1,0 +1,19 @@
+{
+  "name": "proyecto-final",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix biblioteca_digital_backend\" \"npm run dev --prefix biblioteca_digital_frontend\"",
+  "dev-backend": "npm run dev --prefix biblioteca_digital_backend",
+  "dev-frontend": "npm run dev --prefix biblioteca_digital_frontend",
+  "start": "node biblioteca_digital_backend/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

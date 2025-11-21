@@ -1,0 +1,136 @@
+/* ==== ESTILOS GLOBALES ==== */
+
+:root {
+  --color-principal: #0d6efd;
+  --color-secundario: #198754;
+  --color-fondo: #f8f9fa;
+  --color-texto: #212529;
+  --color-navbar: #212529;
+  --color-blanco: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ==== NAVBAR ==== */
+.custom-navbar {
+  background-color: var(--color-navbar) !important;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  color: #f8f9fa !important;
+}
+
+.nav-link:hover {
+  color: var(--color-secundario) !important;
+}
+
+/* ==== BOTONES ==== */
+.btn {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ==== TABLAS ==== */
+.table {
+  background-color: var(--color-blanco);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  background-color: #343a40;
+  color: white;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* ==== FORMULARIOS ==== */
+form {
+  background-color: var(--color-blanco);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+input,
+select {
+  border-radius: 6px !important;
+  border: 1px solid #ced4da;
+}
+
+/* ==== ALERTAS ==== */
+.alert {
+  border-radius: 8px;
+}
+
+/* ==== TARJETAS ==== */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ==== TÍTULOS ==== */
+h2 {
+  font-weight: 700;
+  color: #212529;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ==== PANTALLA DE INICIO ==== */
+.home-container {
+  min-height: calc(100vh - 70px); /* resta la altura del navbar */
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+  padding: 60px 20px;
+}
+
+.home-container h1 {
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.home-container p {
+  max-width: 700px;
+  font-size: 1.2rem;
+  color: #555;
+}
