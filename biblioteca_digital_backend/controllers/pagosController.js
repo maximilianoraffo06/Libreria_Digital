@@ -2,9 +2,9 @@ import * as pagosModel from "../models/pagosModel.js";
 import connection from "../config/db.js";
 
 
-// ==========================
+
 // Crear pago manual
-// ==========================
+
 export const crearPago = async (req, res) => {
   try {
     const { prestamo_id, monto, metodo_pago } = req.body;
@@ -30,9 +30,9 @@ export const crearPago = async (req, res) => {
 };
 
 
-// ==========================
+
 // Obtener pagos
-// ==========================
+
 export const obtenerPagos = async (req, res) => {
   try {
     const pagos = await pagosModel.obtenerPagos();
@@ -45,9 +45,9 @@ export const obtenerPagos = async (req, res) => {
 };
 
 
-// ==========================
+
 // Confirmar pago + actualizar préstamo
-// ==========================
+
 export const confirmarPago = async (req, res) => {
   try {
 

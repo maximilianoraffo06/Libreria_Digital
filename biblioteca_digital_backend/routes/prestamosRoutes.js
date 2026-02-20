@@ -14,9 +14,9 @@ import { verificarToken, verificarAdmin } from "../middlewares/authMiddleware.js
 const router = express.Router();
 
 
-/* =========================
-   📊 ESTADÍSTICAS DASHBOARD (ADMIN)
-========================= */
+
+//   ESTADÍSTICAS DASHBOARD (ADMIN)
+
 router.get(
   "/stats",
   verificarToken,
@@ -25,39 +25,39 @@ router.get(
 );
 
 
-/* =========================
-   CONFIRMAR PAGO
-========================= */
+
+//   CONFIRMAR PAGO
+
 router.put("/confirmar-pago/:pago_id", verificarToken, confirmarPago);
 
 
-/* =========================
-   REGISTRAR PRÉSTAMO
-========================= */
+
+//   REGISTRAR PRÉSTAMO
+
 router.post("/", verificarToken, registrarPrestamo);
 
 
-/* =========================
-   LISTAR TODOS (ADMIN)
-========================= */
+
+//   LISTAR TODOS (ADMIN)
+
 router.get("/", verificarToken, verificarAdmin, listarPrestamos);
 
 
-/* =========================
-   DEVOLVER LIBRO
-========================= */
+
+//   DEVOLVER LIBRO
+
 router.put("/devolver/:id", verificarToken, devolverLibro);
 
 
-/* =========================
-   ELIMINAR PRÉSTAMO (ADMIN)
-========================= */
+
+//   ELIMINAR PRÉSTAMO (ADMIN)
+
 router.delete("/:id", verificarToken, verificarAdmin, borrarPrestamo);
 
 
-/* =========================
-   PRÉSTAMOS DEL USUARIO LOGUEADO
-========================= */
+
+//   PRÉSTAMOS DEL USUARIO LOGUEADO
+
 router.get(
   "/usuario/mis-prestamos",
   verificarToken,

@@ -21,11 +21,11 @@ function PagoPrestamo() {
     cvv: ""
   });
 
-  const precio = 1500; // 💰 Precio fijo alquiler
+  const precio = 1500; //  Precio fijo alquiler
 
-  // =========================
+  
   // Obtener info del libro
-  // =========================
+  
   useEffect(() => {
     const fetchLibro = async () => {
       try {
@@ -39,9 +39,9 @@ function PagoPrestamo() {
     fetchLibro();
   }, [codigoLibro]);
 
-  // =========================
+ 
   // Validar tarjeta
-  // =========================
+  
   const validarTarjeta = () => {
 
     if (tarjeta.numero.length < 16)
@@ -59,9 +59,9 @@ function PagoPrestamo() {
     return null;
   };
 
-  // =========================
+
   // Confirmar pago
-  // =========================
+
   const confirmarPago = async () => {
 
     if (metodoPago === "tarjeta") {
@@ -77,12 +77,12 @@ function PagoPrestamo() {
         return;
       }
 
-      // 📅 Generar fecha devolución (+7 días)
+      //  Generar fecha devolución (+7 días)
       const fecha = new Date();
       fecha.setDate(fecha.getDate() + 7);
       const fechaDevolucion = fecha.toISOString().split("T")[0];
 
-      // 1️⃣ Crear préstamo
+      //  Crear préstamo
       const prestamoRes = await api.post("/prestamos", {
         usuario_id: usuarioId,
         libro_codigo: Number(codigoLibro),
@@ -92,7 +92,7 @@ function PagoPrestamo() {
 
       const prestamoId = prestamoRes.data.prestamo_id;
 
-      // 2️⃣ Crear pago asociado
+      //  Crear pago asociado
       const pagoRes = await api.post("/pagos", {
         prestamo_id: prestamoId,
         monto: precio,
@@ -101,7 +101,7 @@ function PagoPrestamo() {
 
       const pagoId = pagoRes.data.pago_id;
 
-      // 3️⃣ Confirmar pago
+      //  Confirmar pago
       await api.put(`/pagos/${pagoId}/confirmar`);
 
       alert("✅ Pago realizado y préstamo registrado");

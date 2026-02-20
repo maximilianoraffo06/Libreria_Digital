@@ -1,4 +1,4 @@
-/* ==== Contenedor general ==== */
+/*  Contenedor general  */
 #root {
   width: 100%;
   min-height: 100vh;
@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-/* ==== Sección principal ==== */
+/*  Sección principal  */
 main {
   flex: 1;
   padding: 2rem;
@@ -16,7 +16,7 @@ main {
   justify-content: flex-start;
 }
 
-/* ==== Tarjetas de libros ==== */
+/*  Tarjetas de libros */
 .card img {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;

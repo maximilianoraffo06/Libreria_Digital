@@ -37,7 +37,7 @@ function Libros() {
     }
   };
 
-  // 🔥 NUEVA FUNCIÓN
+  
   const pedirPrestamo = (codigoLibro) => {
 
     // Redirige a la página de pago

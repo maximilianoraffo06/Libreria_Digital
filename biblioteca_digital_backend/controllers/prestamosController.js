@@ -1,8 +1,8 @@
 import db from "../config/db.js";
 
-/* =========================
-   REGISTRAR PRÉSTAMO CON PAGO OBLIGATORIO
-========================= */
+
+//   REGISTRAR PRÉSTAMO CON PAGO OBLIGATORIO
+
 export const registrarPrestamo = async (req, res) => {
   try {
     await db.beginTransaction();
@@ -68,9 +68,8 @@ export const registrarPrestamo = async (req, res) => {
 };
 
 
-/* =========================
-   CONFIRMAR PAGO
-========================= */
+//   CONFIRMAR PAGO
+
 export const confirmarPago = async (req, res) => {
   try {
     await db.beginTransaction();
@@ -116,9 +115,9 @@ export const confirmarPago = async (req, res) => {
 };
 
 
-/* =========================
-   LISTAR PRÉSTAMOS
-========================= */
+
+//   LISTAR PRÉSTAMOS
+
 export const listarPrestamos = async (req, res) => {
   try {
     const [prestamos] = await db.query(`
@@ -147,9 +146,9 @@ export const listarPrestamos = async (req, res) => {
 
 
 
-/* =========================
-   DEVOLVER LIBRO
-========================= */
+
+//   DEVOLVER LIBRO
+
 export const devolverLibro = async (req, res) => {
   try {
     const { id } = req.params;
@@ -184,9 +183,9 @@ export const devolverLibro = async (req, res) => {
 };
 
 
-/* =========================
-   BORRAR PRÉSTAMO
-========================= */
+
+ //  BORRAR PRÉSTAMO
+
 export const borrarPrestamo = async (req, res) => {
   try {
     const { id } = req.params;
@@ -205,19 +204,19 @@ export const borrarPrestamo = async (req, res) => {
 
     const libro_codigo = prestamo[0].libro_codigo;
 
-    // 🔥 1. Borrar pagos asociados primero
+    // Borrar pagos asociados primero
     await db.query(
       "DELETE FROM pagos WHERE prestamo_id = ?",
       [id]
     );
 
-    // 🔥 2. Borrar préstamo
+    // Borrar préstamo
     await db.query(
       "DELETE FROM prestamos WHERE id = ?",
       [id]
     );
 
-    // 🔥 3. Liberar libro
+    // Liberar libro
     await db.query(
       "UPDATE libros SET estado = 'disponible' WHERE codigo = ?",
       [libro_codigo]
@@ -236,9 +235,9 @@ export const borrarPrestamo = async (req, res) => {
 
 
 
-/* =========================
-   LISTAR PRÉSTAMOS DEL USUARIO
-========================= */
+
+ //  LISTAR PRÉSTAMOS DEL USUARIO
+
 export const listarPrestamosDeUsuario = async (req, res) => {
   try {
     const usuario_id = req.usuario.id;

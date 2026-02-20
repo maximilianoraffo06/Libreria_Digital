@@ -1,4 +1,4 @@
-/* ==== ESTILOS GLOBALES ==== */
+/*  ESTILOS GLOBALES  */
 
 :root {
   --color-principal: #0d6efd;
@@ -31,7 +31,7 @@ body {
   padding: 20px;
 }
 
-/* ==== NAVBAR ==== */
+/*  NAVBAR  */
 .custom-navbar {
   background-color: var(--color-navbar) !important;
   height: 70px;
@@ -53,13 +53,13 @@ body {
   color: var(--color-secundario) !important;
 }
 
-/* ==== BOTONES ==== */
+/*  BOTONES  */
 .btn {
   border-radius: 6px;
   font-weight: 500;
 }
 
-/* ==== TABLAS ==== */
+/*  TABLAS  */
 .table {
   background-color: var(--color-blanco);
   border-radius: 10px;
@@ -78,7 +78,7 @@ body {
   text-align: center;
 }
 
-/* ==== FORMULARIOS ==== */
+/*  FORMULARIOS  */
 form {
   background-color: var(--color-blanco);
   border-radius: 10px;
@@ -92,12 +92,12 @@ select {
   border: 1px solid #ced4da;
 }
 
-/* ==== ALERTAS ==== */
+/*  ALERTAS  */
 .alert {
   border-radius: 8px;
 }
 
-/* ==== TARJETAS ==== */
+/*  TARJETAS  */
 .card {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -108,7 +108,7 @@ select {
   transform: translateY(-5px);
 }
 
-/* ==== TÍTULOS ==== */
+/*  TÍTULOS  */
 h2 {
   font-weight: 700;
   color: #212529;
@@ -117,7 +117,7 @@ h2 {
 }
 
 
-/* ==== PANTALLA DE INICIO ==== */
+/*  PANTALLA DE INICIO  */
 .home-container {
   min-height: calc(100vh - 70px);
   background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
