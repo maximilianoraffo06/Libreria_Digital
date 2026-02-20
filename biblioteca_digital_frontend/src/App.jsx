@@ -9,7 +9,7 @@ import AdminPanel from "./pages/AdminPanel";
 import PrestamosAdmin from "./pages/PrestamosAdmin";
 import Prestamos from "./pages/Prestamos";
 import PagoPrestamo from "./pages/PagoPrestamo";
-import DashboardAdmin from "./pages/DashboardAdmin"; // 👈 AGREGAR ESTO
+import DashboardAdmin from "./pages/DashboardAdmin";
 
 
 function App() {

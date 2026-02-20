@@ -63,7 +63,7 @@ function PrestamosAdmin() {
     }
   };
 
-  // Columnas SOLO datos
+  // Columnas datos
   const columns = [
     { key: "id", label: "ID" },
     { key: "usuario_nombre", label: "Usuario" },

@@ -144,7 +144,6 @@ function PagoPrestamo() {
             onChange={(e) => setMetodoPago(e.target.value)}
           >
             <option value="tarjeta">Tarjeta</option>
-            <option value="mercadopago">Transferencia MercadoPago</option>
           </select>
         </div>
 
@@ -194,12 +193,6 @@ function PagoPrestamo() {
           </div>
         )}
 
-        {/* ===== MercadoPago ===== */}
-        {metodoPago === "mercadopago" && (
-          <div className="alert alert-info">
-            Serás redirigido a MercadoPago (simulación)
-          </div>
-        )}
 
         {/* ===== Botón ===== */}
         <button

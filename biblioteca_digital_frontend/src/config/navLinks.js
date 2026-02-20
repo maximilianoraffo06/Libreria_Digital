@@ -8,7 +8,7 @@ export const navLinks = {
   ],
 
   admin: [
-    { to: "/admin/dashboard", label: "Dashboard" }, // 👈 NUEVO
+    { to: "/admin/dashboard", label: "Estadisticas" }, 
     { to: "/admin", label: "Panel Admin" },
     { to: "/admin/prestamos", label: "Préstamos" },
   ],

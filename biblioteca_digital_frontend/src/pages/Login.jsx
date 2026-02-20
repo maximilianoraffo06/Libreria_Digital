@@ -14,7 +14,7 @@ function Login() {
     try {
       const res = await api.post("/usuarios/login", { email, contraseña });
 
-      // LOG IMPORTANTE
+      // LOG
       console.log("RESPUESTA COMPLETA DEL LOGIN:", res);
       console.log("DATOS DEL LOGIN:", res.data);
 
