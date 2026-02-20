@@ -1,45 +1,44 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import NavItem from "./NavItem";
+import { navLinks } from "../config/navLinks";
 
 function Navbar() {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [rol, setRol] = useState(null);
 
-  // 🔹 Detecta si el usuario está logueado y su rol
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    const savedRol = localStorage.getItem("rol");
-    setToken(savedToken);
-    setRol(savedRol);
-
-    // 🔁 Escucha cambios en localStorage (para actualizar el navbar al hacer login/logout)
-    const handleStorageChange = () => {
+    const syncAuth = () => {
       setToken(localStorage.getItem("token"));
       setRol(localStorage.getItem("rol"));
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    syncAuth();
+    window.addEventListener("storage", syncAuth);
+    return () => window.removeEventListener("storage", syncAuth);
   }, []);
 
-  // 🔹 Cerrar sesión
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("rol");
+    localStorage.clear();
     setToken(null);
     setRol(null);
     navigate("/login");
   };
 
+  const linksToShow = [
+    ...navLinks.common,
+    ...(rol === "usuario" ? navLinks.usuario : []),
+    ...(rol === "admin" ? navLinks.admin : []),
+  ];
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm custom-navbar px-3">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           📚 Biblioteca Digital
         </Link>
 
-        {/* Botón responsive */}
         <button
           className="navbar-toggler"
           type="button"
@@ -51,39 +50,11 @@ function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/libros">
-                Libros
-              </Link>
-            </li>
-
-            {/* 🔹 Enlaces visibles solo para el administrador */}
-            {rol === "admin" && (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin">
-                    Panel Admin
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin/prestamos">
-                    Préstamos
-                  </Link>
-                </li>
-              </>
-            )}
-
-            {/* 🔹 Enlace visible solo para usuarios normales */}
-            {rol === "usuario" && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/mis-prestamos">
-                  Mis Préstamos
-                </Link>
-              </li>
-            )}
+            {linksToShow.map((link) => (
+              <NavItem key={link.to} {...link} />
+            ))}
           </ul>
 
-          {/* 🔹 Info de usuario y botones de sesión */}
           <div className="d-flex align-items-center">
             {token && (
               <span className="text-light me-3">

@@ -5,7 +5,10 @@ dotenv.config();
 
 //Verificar si el token JWT es válido
 export const verificarToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  console.log("HEADERS RECIBIDOS:", req.headers);
+
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+
 
   if (!authHeader) {
     return res.status(401).json({ mensaje: "Acceso denegado. Token no proporcionado." });

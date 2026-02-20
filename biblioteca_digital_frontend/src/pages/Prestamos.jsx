@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import PageTitle from "../components/ui/PageTitle";
+import Table from "../components/ui/Table";
+import Button from "../components/ui/Button";
+import { formatDate } from "../utils/formatDate";
 
 function Prestamos() {
   const [prestamos, setPrestamos] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
-  // Cargar préstamos del usuario al iniciar
   useEffect(() => {
     obtenerMisPrestamos();
   }, []);
@@ -23,12 +26,16 @@ function Prestamos() {
   };
 
   const devolverLibro = async (id) => {
-    if (!confirm("¿Querés devolver este libro?")) return;
+    if (!window.confirm("¿Querés devolver este libro?")) return;
+
     try {
       const token = localStorage.getItem("token");
-      await api.put(`/prestamos/devolver/${id}`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.put(
+        `/prestamos/devolver/${id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
       setMensaje("📗 Libro devuelto correctamente");
       obtenerMisPrestamos();
     } catch (error) {
@@ -36,65 +43,66 @@ function Prestamos() {
     }
   };
 
+  const columns = [
+    { key: "id", label: "ID" },
+
+    { key: "titulo", label: "Libro" },
+
+    {
+      key: "fecha_prestamo",
+      label: "Fecha préstamo",
+      render: (value) => formatDate(value),
+    },
+
+    {
+      key: "fecha_devolucion_prevista",
+      label: "Devolución",
+      render: (value) => formatDate(value),
+    },
+
+    {
+      key: "estado",
+      label: "Estado",
+      render: (estado) => (
+        <span
+          className={`badge ${
+            estado === "prestado" ? "bg-warning" : "bg-success"
+          }`}
+        >
+          {estado}
+        </span>
+      ),
+    },
+
+    {
+      key: "acciones",
+      label: "Acción",
+      render: (_, row) =>
+        row.estado === "prestado" && (
+          <Button
+            variant="success"
+            className="btn-sm"
+            onClick={() => devolverLibro(row.id)}
+          >
+            Devolver
+          </Button>
+        ),
+    },
+  ];
+
   return (
-    <div className="page-container">
-      <div className="container">
-        <h2 className="mb-4 text-center">📚 Mis Préstamos</h2>
+    <div className="container mt-4">
+      <PageTitle icon="📚" text="Mis Préstamos" />
 
-        {mensaje && <div className="alert alert-info text-center">{mensaje}</div>}
+      {mensaje && (
+        <div className="alert alert-info text-center">{mensaje}</div>
+      )}
 
-        <div className="table-responsive shadow-sm">
-          <table className="table table-striped align-middle">
-            <thead className="table-dark">
-              <tr>
-                <th>ID</th>
-                <th>Libro</th>
-                <th>Fecha préstamo</th>
-                <th>Fecha devolución prevista</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {prestamos.length === 0 ? (
-                <tr>
-                  <td colSpan="6" className="text-center">
-                    No tenés préstamos registrados
-                  </td>
-                </tr>
-              ) : (
-                prestamos.map((p) => (
-                  <tr key={p.id}>
-                    <td>{p.id}</td>
-                    <td>{p.titulo_libro}</td>
-                    <td>{p.fecha_prestamo}</td>
-                    <td>{p.fecha_devolucion_prevista || "-"}</td>
-                    <td>
-                      <span
-                        className={`badge ${
-                          p.estado === "prestado" ? "bg-warning" : "bg-success"
-                        }`}
-                      >
-                        {p.estado}
-                      </span>
-                    </td>
-                    <td>
-                      {p.estado === "prestado" && (
-                        <button
-                          className="btn btn-sm btn-success"
-                          onClick={() => devolverLibro(p.id)}
-                        >
-                          Devolver
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <Table
+        columns={columns}
+        data={prestamos}
+        emptyText="No tenés préstamos registrados"
+      />
     </div>
   );
 }

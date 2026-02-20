@@ -4,25 +4,64 @@ import {
   registrarPrestamo,
   devolverLibro,
   borrarPrestamo,
-  listarPrestamosDeUsuario
+  listarPrestamosDeUsuario,
+  confirmarPago,
+  obtenerEstadisticas 
 } from "../controllers/prestamosController.js";
+
 import { verificarToken, verificarAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-//Listar todos los préstamos (solo admin)
-router.get("/", verificarToken, verificarAdmin, listarPrestamos);
 
-//Registrar nuevo préstamo (usuario autenticado)
+/* =========================
+   📊 ESTADÍSTICAS DASHBOARD (ADMIN)
+========================= */
+router.get(
+  "/stats",
+  verificarToken,
+  verificarAdmin,
+  obtenerEstadisticas
+);
+
+
+/* =========================
+   CONFIRMAR PAGO
+========================= */
+router.put("/confirmar-pago/:pago_id", verificarToken, confirmarPago);
+
+
+/* =========================
+   REGISTRAR PRÉSTAMO
+========================= */
 router.post("/", verificarToken, registrarPrestamo);
 
-//Marcar devolución (puede hacerlo usuario o admin)
+
+/* =========================
+   LISTAR TODOS (ADMIN)
+========================= */
+router.get("/", verificarToken, verificarAdmin, listarPrestamos);
+
+
+/* =========================
+   DEVOLVER LIBRO
+========================= */
 router.put("/devolver/:id", verificarToken, devolverLibro);
 
-//Eliminar préstamo (solo admin)
+
+/* =========================
+   ELIMINAR PRÉSTAMO (ADMIN)
+========================= */
 router.delete("/:id", verificarToken, verificarAdmin, borrarPrestamo);
 
-//Listar préstamos del usuario autenticado
-router.get("/usuario/mis-prestamos", verificarToken, listarPrestamosDeUsuario);
+
+/* =========================
+   PRÉSTAMOS DEL USUARIO LOGUEADO
+========================= */
+router.get(
+  "/usuario/mis-prestamos",
+  verificarToken,
+  listarPrestamosDeUsuario
+);
 
 export default router;

@@ -1,20 +1,9 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
+dotenv.config();
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: __dirname + "/../.env" });
-
-console.log("🔍 Variables de conexión:", {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-const connection = mysql.createConnection({
+const connection = await mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -22,12 +11,6 @@ const connection = mysql.createConnection({
   port: process.env.DB_PORT || 3306
 });
 
-connection.connect((error) => {
-  if (error) {
-    console.error("❌ Error al conectar con la base de datos:", error.message);
-  } else {
-    console.log("✅ Conexión exitosa a la base de datos MySQL");
-  }
-});
+console.log("✅ Conexión exitosa a MySQL");
 
 export default connection;

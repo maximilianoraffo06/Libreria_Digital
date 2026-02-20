@@ -1,31 +1,40 @@
 import db from "../config/db.js";
 
-//Obtener todos los usuarios
-export const getAllUsuarios = (callback) => {
-  const sql = "SELECT id, nombre, email, rol, fecha_registro FROM usuarios";
-  db.query(sql, callback);
+// Obtener todos
+export const getAllUsuarios = async () => {
+  const [rows] = await db.query(
+    "SELECT id, nombre, email, rol, fecha_registro FROM usuarios"
+  );
+  return rows;
 };
 
-//Buscar usuario por email
-export const getUsuarioByEmail = (email, callback) => {
-  const sql = "SELECT * FROM usuarios WHERE email = ?";
-  db.query(sql, [email], callback);
+// Buscar por email
+export const getUsuarioByEmail = async (email) => {
+  const [rows] = await db.query(
+    "SELECT * FROM usuarios WHERE email = ?",
+    [email]
+  );
+  return rows[0];
 };
 
-//Crear nuevo usuario
-export const createUsuario = (nombre, email, contraseña, rol, callback) => {
-  const sql = "INSERT INTO usuarios (nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)";
-  db.query(sql, [nombre, email, contraseña, rol], callback);
+// Crear usuario
+export const createUsuario = async (nombre, email, contraseña, rol) => {
+  const [result] = await db.query(
+    "INSERT INTO usuarios (nombre, email, contraseña, rol) VALUES (?, ?, ?, ?)",
+    [nombre, email, contraseña, rol]
+  );
+  return result.insertId;
 };
 
-//Actualizar usuario
-export const updateUsuario = (id, nombre, email, rol, callback) => {
-  const sql = "UPDATE usuarios SET nombre = ?, email = ?, rol = ? WHERE id = ?";
-  db.query(sql, [nombre, email, rol, id], callback);
+// Actualizar
+export const updateUsuario = async (id, nombre, email, rol) => {
+  await db.query(
+    "UPDATE usuarios SET nombre = ?, email = ?, rol = ? WHERE id = ?",
+    [nombre, email, rol, id]
+  );
 };
 
-//Eliminar usuario
-export const deleteUsuario = (id, callback) => {
-  const sql = "DELETE FROM usuarios WHERE id = ?";
-  db.query(sql, [id], callback);
+// Eliminar
+export const deleteUsuario = async (id) => {
+  await db.query("DELETE FROM usuarios WHERE id = ?", [id]);
 };

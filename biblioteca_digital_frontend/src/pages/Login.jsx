@@ -14,6 +14,10 @@ function Login() {
     try {
       const res = await api.post("/usuarios/login", { email, contraseña });
 
+      // LOG IMPORTANTE
+      console.log("RESPUESTA COMPLETA DEL LOGIN:", res);
+      console.log("DATOS DEL LOGIN:", res.data);
+
       // Guardar token y rol en localStorage
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("rol", res.data.rol);
@@ -24,13 +28,16 @@ function Login() {
       // Redirigir según el rol
       if (res.data.rol === "admin") {
         navigate("/admin");
+        window.location.reload();
       } else {
         navigate("/libros");
+        window.location.reload();
       }
 
-      window.location.reload();
+     // window.location.reload();
 
     } catch (error) {
+      console.log("ERROR DEL LOGIN:", error.response?.data);
       setMensaje(error.response?.data?.mensaje || "Error al iniciar sesión");
     }
   };
